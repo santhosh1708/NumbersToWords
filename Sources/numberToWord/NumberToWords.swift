@@ -21,6 +21,18 @@ public struct NumberToWords {
         4: "trillion", 5: "quadrillion", 6: "quintillion"
     ]
     
+    private static let wordToNumberMap: [String: Int] = [
+          "zero": 0, "one": 1, "two": 2, "three": 3, "four": 4,
+          "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9,
+          "ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13,
+          "fourteen": 14, "fifteen": 15, "sixteen": 16,
+          "seventeen": 17, "eighteen": 18, "nineteen": 19,
+          "twenty": 20, "thirty": 30, "forty": 40, "fifty": 50,
+          "sixty": 60, "seventy": 70, "eighty": 80, "ninety": 90,
+          "hundred": 100, "thousand": 1_000, "million": 1_000_000,
+          "billion": 1_000_000_000, "trillion": 1_000_000_000_000
+      ]
+    
     public static func convert(_ number: Int) -> String {
         if number == 0 { return "zero" }
         
@@ -70,4 +82,28 @@ public struct NumberToWords {
         
         return words.joined(separator: " ")
     }
+    
+    public static func convertWordToNumber(_ words: String) -> Int? {
+          let tokens = words.lowercased().split(separator: " ").map { String($0) }
+          var total = 0
+          var current = 0
+          
+          for token in tokens {
+              guard let value = wordToNumberMap[token] else {
+                  return nil  // unknown word
+              }
+              
+              if value == 100 {
+                  current *= value
+              } else if value >= 1000 {
+                  current *= value
+                  total += current
+                  current = 0
+              } else {
+                  current += value
+              }
+          }
+          total += current
+          return total
+      }
 }
