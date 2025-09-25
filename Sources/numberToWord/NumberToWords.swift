@@ -44,9 +44,9 @@ public struct NumberToWords {
         return parts.joined(separator: " ")
     }
     
-    func convertRange(_ range: ClosedRange<Int>) -> [String] {
-        return range.map { NumberToWords.convert($0) }
-    }
+    public static func convertRange(_ range: ClosedRange<Int>) -> [String] {
+         return range.map { NumberToWords.convert($0) }
+     }
     
     private static func convertChunk(_ number: Int) -> String {
         var n = number
