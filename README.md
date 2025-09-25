@@ -3,6 +3,12 @@
 A Swift package to convert numbers into words (and vice versa).  
 Supports both integers and decimals, as well as converting worded numbers back into numeric values.
 
+```
+Requirements:
+Swift 5.5+
+iOS 13+ / macOS 10.15+ / watchOS 6+ / tvOS 13+
+```
+
 ## Features
 
 - ✅ Convert integers to words  
@@ -53,7 +59,4 @@ print(NumberToWords.convertDecimal(123.45))
 print(NumberToWords.convertWordToDecimal("one hundred twenty three point four five"))
 // 123.45
 
-Requirements:
-Swift 5.5+
-iOS 13+ / macOS 10.15+ / watchOS 6+ / tvOS 13+
 ```
