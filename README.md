@@ -25,7 +25,7 @@ Add this package to your project by adding the following to your **Package.swift
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/santhosh1708/NumberToWords.git", from: "1.0.0")
+    .package(url: "https://github.com/santhosh1708/NumbersToWords.git", from: "1.0.0")
 ]
 And add NumberToWords as a dependency in your target:
 .target(
