@@ -1,5 +1,7 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
+
+import Foundation
 public struct NumberToWords {
     
     private static let ones: [Int: String] = [
@@ -106,4 +108,65 @@ public struct NumberToWords {
           total += current
           return total
       }
+    
+    // MARK: - Decimal conversion (Double)
+      public static func convertDecimal(_ number: Double) -> String {
+          let intPart = Int(number)
+          let decimalPart = number - Double(intPart)
+          
+          var result = convert(intPart)
+          
+          if decimalPart > 0 {
+              let decimalString = String(decimalPart).split(separator: ".")[1]
+              let decimalWords = decimalString.map { NumberToWords.convert(Int(String($0))!) }
+              result += " point " + decimalWords.joined(separator: " ")
+          }
+          
+          return result
+      }
+    
+    public static func convertWordToDecimal(_ words: String) -> Double? {
+        // Explicit CharacterSet reference
+        let lowercased = String(words).lowercased()
+            .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        // Split at " point "
+        let parts = lowercased.components(separatedBy: " point ")
+        
+        guard !parts.isEmpty else { return nil }
+        
+        // Integer part
+        guard let intPart = convertWordToNumber(String(parts[0])
+            .trimmingCharacters(in: CharacterSet.whitespaces)) else {
+            return nil
+        }
+        
+        var result = Double(intPart)
+        
+        // Fractional part
+        if parts.count > 1 {
+            let decimalWords = parts[1].split(separator: " ")
+            var decimalString = ""
+            
+            for sub in decimalWords {
+                let word = String(sub)
+                if let digit = wordToNumberMap[word] {
+                    decimalString += String(digit)
+                } else {
+                    return nil
+                }
+            }
+            
+            if let decimalValue = Double("0." + decimalString) {
+                result += decimalValue
+            } else {
+                return nil
+            }
+        }
+        
+        return result
+    }
+
+
+
 }
