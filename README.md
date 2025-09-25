@@ -29,7 +29,8 @@ And add NumberToWords as a dependency in your target:
 Then run:
 swift build
 ```
-
+How to use
+```swift
 import NumberToWords
 
 // Integer conversion
@@ -55,3 +56,4 @@ print(NumberToWords.convertWordToDecimal("one hundred twenty three point four fi
 Requirements:
 Swift 5.5+
 iOS 13+ / macOS 10.15+ / watchOS 6+ / tvOS 13+
+```
